@@ -1,0 +1,188 @@
+Sub GLSummary()
+Dim RngBreak As Range
+Dim iLastrow As Long
+Dim iLastrow2 As Long
+
+Application.Calculation = xlCalculationManual
+Application.ScreenUpdating = False
+Application.DisplayStatusBar = False
+Application.EnableEvents = False
+ActiveSheet.DisplayPageBreaks = False
+
+Sheet9.Activate
+
+Sheet9.Range("A1") = "183-180"
+Sheet9.Range("B1") = "CAD"
+Sheet9.Range("C1") = "Calypso Amount"
+Sheet9.Range("D1") = "GL Amount"
+Sheet9.Range("E1") = "Break"
+Sheet9.Range("F1") = "Direction"
+Sheet9.Range("G1") = "Associate"
+Sheet9.Range("H1") = "COMMENTS"
+Sheet9.Range("I1") = "Age"
+Sheet9.Range("A1:I1").Font.Bold = True
+ 
+With Sheet9.Range("A1:I1").Interior
+        .Pattern = xlSolid
+        .PatternColorIndex = xlAutomatic
+        .ThemeColor = xlThemeColorAccent1
+        .TintAndShade = 0.799981688894314
+        .PatternTintAndShade = 0
+End With
+    
+iLastrow2 = Sheet4.Cells(Sheet4.Cells.Rows.Count, 4).End(xlUp).Row
+' 183180 CAD
+Set RngBreak = Sheet4.Range("D7:D" & iLastrow2)
+For Each r In RngBreak
+a = r.Offset(0, 7)
+If r.Offset(0, 7) = "183-180 CAD" Then
+iLastrow = Sheet9.Cells(Sheet9.Cells.Rows.Count, 1).End(xlUp).Row
+Sheet9.Range("A" & iLastrow + 1) = r.Offset(0, 10)
+Sheet9.Range("B" & iLastrow + 1) = "CAD"
+Sheet9.Range("C" & iLastrow + 1) = r.Offset(0, 4)
+Sheet9.Range("D" & iLastrow + 1) = r.Offset(0, 8)
+Sheet9.Range("E" & iLastrow + 1) = r.Offset(0, 4) - r.Offset(0, 8)
+Sheet9.Range("F" & iLastrow + 1) = r.Offset(0, 3)
+Sheet9.Range("G" & iLastrow + 1) = r.Offset(0, 9)
+Sheet9.Range("I" & iLastrow + 1) = r.Offset(0, 6)
+End If
+Next
+'183180 USD
+iLastrow = Sheet9.Cells(Sheet9.Cells.Rows.Count, 1).End(xlUp).Row + 4
+
+Sheet9.Range("A" & iLastrow + 1) = "183-180"
+Sheet9.Range("B" & iLastrow + 1) = "USD"
+Sheet9.Range("C" & iLastrow + 1) = "Calypso Amount"
+Sheet9.Range("D" & iLastrow + 1) = "GL Amount"
+Sheet9.Range("E" & iLastrow + 1) = "Break"
+Sheet9.Range("F" & iLastrow + 1) = "Direction"
+Sheet9.Range("G" & iLastrow + 1) = "Associate"
+Sheet9.Range("H" & iLastrow + 1) = "COMMENTS"
+Sheet9.Range("I" & iLastrow + 1) = "Age"
+
+Sheet9.Range(Cells(iLastrow + 1, 1), Cells(iLastrow + 1, 9)).Font.Bold = True
+ 
+With Range(Cells(iLastrow + 1, 1), Cells(iLastrow + 1, 9)).Interior
+        .Pattern = xlSolid
+        .PatternColorIndex = xlAutomatic
+        .ThemeColor = xlThemeColorAccent1
+        .TintAndShade = 0.799981688894314
+        .PatternTintAndShade = 0
+End With
+
+
+For Each c In RngBreak
+If c.Offset(0, 7) = "183-180 USD" Then
+iLastrow = Sheet9.Cells(Sheet9.Cells.Rows.Count, 1).End(xlUp).Row
+Sheet9.Range("A" & iLastrow + 1) = c.Offset(0, 10)
+Sheet9.Range("B" & iLastrow + 1) = "USD"
+Sheet9.Range("C" & iLastrow + 1) = c.Offset(0, 4)
+Sheet9.Range("D" & iLastrow + 1) = c.Offset(0, 8)
+Sheet9.Range("E" & iLastrow + 1) = c.Offset(0, 4) - c.Offset(0, 8)
+Sheet9.Range("F" & iLastrow + 1) = c.Offset(0, 3)
+Sheet9.Range("G" & iLastrow + 1) = c.Offset(0, 9)
+Sheet9.Range("I" & iLastrow + 1) = c.Offset(0, 6)
+End If
+Next
+
+'483180 CAD
+iLastrow = Sheet9.Cells(Sheet9.Cells.Rows.Count, 1).End(xlUp).Row + 4
+
+Sheet9.Range("A" & iLastrow + 1) = "483-180"
+Sheet9.Range("B" & iLastrow + 1) = "CAD"
+Sheet9.Range("C" & iLastrow + 1) = "Calypso Amount"
+Sheet9.Range("D" & iLastrow + 1) = "GL Amount"
+Sheet9.Range("E" & iLastrow + 1) = "Break"
+Sheet9.Range("F" & iLastrow + 1) = "Direction"
+Sheet9.Range("G" & iLastrow + 1) = "Associate"
+Sheet9.Range("H" & iLastrow + 1) = "COMMENTS"
+Sheet9.Range("I" & iLastrow + 1) = "Age"
+
+Sheet9.Range(Cells(iLastrow + 1, 1), Cells(iLastrow + 1, 9)).Font.Bold = True
+ 
+With Range(Cells(iLastrow + 1, 1), Cells(iLastrow + 1, 9)).Interior
+        .Pattern = xlSolid
+        .PatternColorIndex = xlAutomatic
+        .ThemeColor = xlThemeColorAccent1
+        .TintAndShade = 0.799981688894314
+        .PatternTintAndShade = 0
+End With
+
+
+For Each k In RngBreak
+If k.Offset(0, 7) = "483-180 CAD" Then
+iLastrow = Sheet9.Cells(Sheet9.Cells.Rows.Count, 1).End(xlUp).Row
+Sheet9.Range("A" & iLastrow + 1) = k.Offset(0, 10)
+Sheet9.Range("B" & iLastrow + 1) = "CAD"
+Sheet9.Range("C" & iLastrow + 1) = k.Offset(0, 4)
+Sheet9.Range("D" & iLastrow + 1) = k.Offset(0, 8)
+Sheet9.Range("E" & iLastrow + 1) = k.Offset(0, 4) - k.Offset(0, 8)
+Sheet9.Range("F" & iLastrow + 1) = k.Offset(0, 3)
+Sheet9.Range("G" & iLastrow + 1) = k.Offset(0, 9)
+Sheet9.Range("I" & iLastrow + 1) = k.Offset(0, 6)
+End If
+Next
+'483180 USD
+iLastrow = Sheet9.Cells(Sheet9.Cells.Rows.Count, 1).End(xlUp).Row + 4
+
+Sheet9.Range("A" & iLastrow + 1) = "483-180"
+Sheet9.Range("B" & iLastrow + 1) = "USD"
+Sheet9.Range("C" & iLastrow + 1) = "Calypso Amount"
+Sheet9.Range("D" & iLastrow + 1) = "GL Amount"
+Sheet9.Range("E" & iLastrow + 1) = "Break"
+Sheet9.Range("F" & iLastrow + 1) = "Direction"
+Sheet9.Range("G" & iLastrow + 1) = "Associate"
+Sheet9.Range("H" & iLastrow + 1) = "COMMENTS"
+Sheet9.Range("I" & iLastrow + 1) = "Age"
+
+Sheet9.Range(Cells(iLastrow + 1, 1), Cells(iLastrow + 1, 9)).Font.Bold = True
+ 
+With Range(Cells(iLastrow + 1, 1), Cells(iLastrow + 1, 9)).Interior
+        .Pattern = xlSolid
+        .PatternColorIndex = xlAutomatic
+        .ThemeColor = xlThemeColorAccent1
+        .TintAndShade = 0.799981688894314
+        .PatternTintAndShade = 0
+End With
+
+
+For Each w In RngBreak
+If w.Offset(0, 7) = "483-180 USD" Then
+iLastrow = Sheet9.Cells(Sheet9.Cells.Rows.Count, 1).End(xlUp).Row
+Sheet9.Range("A" & iLastrow + 1) = w.Offset(0, 10)
+Sheet9.Range("B" & iLastrow + 1) = "USD"
+Sheet9.Range("C" & iLastrow + 1) = w.Offset(0, 4)
+Sheet9.Range("D" & iLastrow + 1) = w.Offset(0, 8)
+Sheet9.Range("E" & iLastrow + 1) = w.Offset(0, 4) - w.Offset(0, 8)
+Sheet9.Range("F" & iLastrow + 1) = w.Offset(0, 3)
+Sheet9.Range("G" & iLastrow + 1) = w.Offset(0, 9)
+Sheet9.Range("I" & iLastrow + 1) = w.Offset(0, 6)
+End If
+Next
+
+Columns("C:E").Style = "Comma"
+
+Application.Calculation = xlCalculationAutomatic
+Application.ScreenUpdating = True
+Application.DisplayStatusBar = True
+Application.EnableEvents = True
+ActiveSheet.DisplayPageBreaks = True
+End Sub
+Sub ExportReport()
+'
+' Macro1 Macro
+'
+
+'
+Dim strDate As String
+strDate = VBA.Format(Now, "mmm dd yyyy")
+
+    Sheets("GL Summary").Select
+    Sheets("GL Summary").Copy
+    'ChDir "\\dopssrv0\group\credit\CMG OPS\Mthly_Interest\Weekly Report"
+    ActiveWorkbook.SaveAs Filename:= _
+        "\\dopssrv0\group\credit\CRM\CMG OPS\Mthly_Interest\Weekly Report\Interest Weekly Report " & strDate & ".xlsx", _
+        FileFormat:=xlOpenXMLWorkbook, CreateBackup:=False
+    ActiveWindow.Close
+End Sub
+
