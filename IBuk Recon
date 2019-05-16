@@ -1,0 +1,153 @@
+Sub interestRec()
+Dim iLastrow, iLastrow1, iLastrow2, iLastrow3 As Long
+Dim iAmount As Double
+Dim StrAdaptiv As String
+Dim RngBreak, RngiBuk As Range
+Dim RngEur, RngQue As Range
+
+Application.Calculation = xlCalculationManual
+Application.ScreenUpdating = False
+Application.DisplayStatusBar = False
+Application.EnableEvents = False
+ActiveSheet.DisplayPageBreaks = False
+
+Sheet4.Range("D7:N10000").ClearContents
+iLastrow = Sheet2.Cells(Sheet2.Rows.Count, 1).End(xlUp).Row
+iLastrow2 = Sheet3.Cells(Sheet3.Rows.Count, 4).End(xlUp).Row
+
+Set RngiBuk = Sheet3.Range("J2:J" & iLastrow2)
+Set RngEur = Exception.Range("J:J")
+
+For Each c In RngiBuk
+c.Offset(0, 0) = "=SUMIFS(G:G,H:H,H" & c.Row & ",I:I,I" & c.Row & ")"
+Next
+
+For i = 2 To iLastrow
+
+StrAdaptiv = Sheet2.Cells(i, 3)
+iAmount = Sheet2.Cells(i, 9)
+Count = Application.WorksheetFunction.CountIf(Sheet3.Range("J:J"), Sheet2.Cells(i, 9))
+count1 = Application.WorksheetFunction.CountIf(Sheet3.Range("H:H"), Sheet2.Cells(i, 3))
+Exeption = Application.WorksheetFunction.CountIf(Exception.Range("A:A"), Sheet2.Cells(i, 3))
+If (Count = 0 Or count1 = 0) And Sheet2.Cells(i, 9) <> 0 And CheckMatch(iAmount, StrAdaptiv) = False And Exeption = 0 Then
+    'Eliminate EURO , Irland ,Harris and HNESBIT
+    a = Application.WorksheetFunction.CountIf(RngEur, Sheet2.Cells(i, 3))
+    If (Not Sheet2.Cells(i, 2).Value Like "*BOMI*") And (Application.WorksheetFunction.CountIf(RngEur, Sheet2.Cells(i, 3)) = 0 _
+    Or Sheet2.Cells(i, 2) = "BKTOK - BMO ISDA REG VM CSA") And Sheet2.Cells(i, 3) <> "" And (Not Sheet2.Cells(i, 2).Value Like "*HARRIS*") _
+    And (Not Sheet2.Cells(i, 2).Value Like "*HNESBIT*") And (Not Sheet2.Cells(i, 3) = "BKMONT") And (Not Sheet2.Cells(i, 3) = "BHINV") Then
+    
+        iLastrow1 = Sheet4.Cells(Sheet4.Rows.Count, 4).End(xlUp).Row
+        Sheet4.Cells(iLastrow1 + 1, 4) = Sheet2.Cells(i, 3)
+        Sheet4.Cells(iLastrow1 + 1, 5) = Sheet2.Cells(i, 5)
+        Sheet4.Cells(iLastrow1 + 1, 6) = Sheet2.Cells(i, 8)
+            If Sheet2.Cells(i, 9) > 0 Then
+            Sheet4.Cells(iLastrow1 + 1, 7) = "Receive"
+            Else
+            Sheet4.Cells(iLastrow1 + 1, 7) = "Pay"
+            End If
+        Sheet4.Cells(iLastrow1 + 1, 8) = Sheet2.Cells(i, 9)
+        Sheet4.Cells(iLastrow1 + 1, 9) = Sheet1.Cells(3, 2)
+        Sheet4.Cells(iLastrow1 + 1, 10) = "=NETWORKDAYS(I" & iLastrow1 + 1 & "+1,TODAY(),MutualHoliday!A:A)"
+        Sheet4.Cells(iLastrow1 + 1, 14) = Sheet2.Cells(i, 2)
+        StrAdaptiv = Sheet4.Cells(iLastrow1 + 1, 4)
+        If Application.WorksheetFunction.CountIf(Exception.Range("A:A"), StrAdaptiv) = 1 Then
+            Sheet4.Range("D" & iLastrow1 + 1).Interior.Color = 6724095
+        End If
+    End If
+End If
+
+Next
+
+iLastrow3 = Sheet4.Cells(Sheet4.Rows.Count, 4).End(xlUp).Row
+Set RngBreak = Sheet4.Range("D7:D" & iLastrow3)
+'Add G/L Account,Ibulk amount and Associate name
+For Each r In RngBreak
+ For Each c In RngiBuk
+    If r = c.Offset(0, -2) Then
+    r.Offset(0, 7) = c.Offset(0, -1)
+    r.Offset(0, 8) = c
+    End If
+ Next
+ 
+
+    If r.Offset(0, 2) = "CAD" And r.Offset(0, 3) = "Receive" Then
+        r.Offset(0, 7) = "183-180 CAD"
+    ElseIf r.Offset(0, 2) = "CAD" And r.Offset(0, 3) = "Pay" Then
+        r.Offset(0, 7) = "483-180 CAD"
+    ElseIf r.Offset(0, 2) = "USD" And r.Offset(0, 3) = "Receive" Then
+        r.Offset(0, 7) = "183-180 USD"
+    ElseIf r.Offset(0, 2) = "USD" And r.Offset(0, 3) = "Pay" Then
+        r.Offset(0, 7) = "483-180 USD"
+    End If
+
+ 
+Next
+
+ 'Assign Associate Name
+ Set RngQue = Sheet1.Range("R3:R31")
+ Set RngAcadia = Exception.Range("M:M")
+ 
+ For Each k In RngBreak
+    For Each w In RngQue
+    If Left(k, 1) = w And Application.WorksheetFunction.CountIf(RngAcadia, k) = 0 Then
+    k.Offset(0, 9) = w.Offset(0, 1)
+    ElseIf Application.WorksheetFunction.CountIf(RngAcadia, k) <> 0 Then
+    k.Offset(0, 9) = Sheet1.Range("S30")
+    End If
+    Next
+ Next
+ 
+Sheet4.Activate
+ 
+Application.Calculation = xlCalculationAutomatic
+Application.ScreenUpdating = True
+Application.DisplayStatusBar = True
+Application.EnableEvents = True
+ActiveSheet.DisplayPageBreaks = True
+
+End Sub
+
+Function CheckMatch(iAmount As Double, StrAdaptiv As String) As String
+
+Dim strMatch As String
+
+strMatch = False
+
+iLastrow2 = Sheet3.Cells(Sheet3.Rows.Count, 1).End(xlUp).Row
+Count = Application.WorksheetFunction.CountIf(Sheet3.Range("H:H"), StrAdaptiv)
+    For j = 1 To iLastrow2
+        If Sheet3.Cells(j, 8) = StrAdaptiv Then
+            If Abs(Sheet3.Cells(j, 10) - iAmount) < 25 Or iAmount < 25 Then
+            strMatch = True
+            End If
+        ElseIf Count = 0 Then
+            If Abs(iAmount) < 25 Then
+            strMatch = True
+            End If
+        End If
+    Next
+
+CheckMatch = strMatch
+
+End Function
+
+Sub clear()
+
+Sheet4.Range("D7:N20000").clear
+Sheet3.Range("A2:J20000").clear
+
+End Sub
+
+Sub clear_GL()
+
+Sheet9.Range("A:I").clear
+
+End Sub
+Sub clearCALY_GL()
+
+CAD183.Cells.clear
+CAD483.Cells.clear
+USD183.Cells.clear
+USD483.Cells.clear
+End Sub
+
