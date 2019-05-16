@@ -1,0 +1,115 @@
+Sub GL_183180_CAD()
+Dim iLastrow As Long
+
+Application.Calculation = xlCalculationManual
+Application.ScreenUpdating = False
+Application.DisplayStatusBar = False
+Application.EnableEvents = False
+ActiveSheet.DisplayPageBreaks = False
+
+iLastrow = CAD183.Cells(CAD183.Cells.Rows.Count, 1).End(xlUp).Row
+iLastrow1 = Sheet3.Cells(Sheet3.Cells.Rows.Count, 1).End(xlUp).Row
+
+For i = 1 To iLastrow
+    If CAD183.Cells(i, 7) <> "" Then
+    CAD183.Cells(i, 8) = CAD183.Cells(i + 1, 1)
+    iLastrow1 = Sheet3.Cells(Sheet3.Cells.Rows.Count, 1).End(xlUp).Row
+    CAD183.Rows(i).Copy
+    Sheet3.Rows(iLastrow1 + 1).PasteSpecial
+    Sheet3.Cells(iLastrow1 + 1, 9) = "183-180 CAD"
+    End If
+Next
+
+Application.Calculation = xlCalculationAutomatic
+Application.ScreenUpdating = True
+Application.DisplayStatusBar = True
+Application.EnableEvents = True
+ActiveSheet.DisplayPageBreaks = True
+End Sub
+Sub GL_483180_CAD()
+Dim iLastrow As Long
+
+Application.Calculation = xlCalculationManual
+Application.ScreenUpdating = False
+Application.DisplayStatusBar = False
+Application.EnableEvents = False
+ActiveSheet.DisplayPageBreaks = False
+
+iLastrow = CAD483.Cells(CAD483.Cells.Rows.Count, 1).End(xlUp).Row
+iLastrow1 = Sheet3.Cells(Sheet3.Cells.Rows.Count, 1).End(xlUp).Row
+
+For i = 1 To iLastrow
+    If CAD483.Cells(i, 7) <> "" Then
+    CAD483.Cells(i, 8) = CAD483.Cells(i + 1, 1)
+    iLastrow1 = Sheet3.Cells(Sheet3.Cells.Rows.Count, 1).End(xlUp).Row
+    CAD483.Rows(i).Copy
+    Sheet3.Rows(iLastrow1 + 1).PasteSpecial
+    Sheet3.Cells(iLastrow1 + 1, 9) = "483-180 CAD"
+    End If
+Next
+
+Application.Calculation = xlCalculationAutomatic
+Application.ScreenUpdating = True
+Application.DisplayStatusBar = True
+Application.EnableEvents = True
+ActiveSheet.DisplayPageBreaks = True
+
+End Sub
+Sub GL_183180_USD()
+Dim iLastrow As Long
+
+Application.Calculation = xlCalculationManual
+Application.ScreenUpdating = False
+Application.DisplayStatusBar = False
+Application.EnableEvents = False
+ActiveSheet.DisplayPageBreaks = False
+
+
+iLastrow = USD183.Cells(USD183.Cells.Rows.Count, 1).End(xlUp).Row
+iLastrow1 = Sheet3.Cells(Sheet3.Cells.Rows.Count, 1).End(xlUp).Row
+
+For i = 1 To iLastrow
+    If USD183.Cells(i, 7) <> "" Then
+    USD183.Cells(i, 8) = USD183.Cells(i + 1, 1)
+    iLastrow1 = Sheet3.Cells(Sheet3.Cells.Rows.Count, 1).End(xlUp).Row
+    USD183.Rows(i).Copy
+    Sheet3.Rows(iLastrow1 + 1).PasteSpecial
+    Sheet3.Cells(iLastrow1 + 1, 9) = "183-180 USD"
+    End If
+Next
+
+Application.Calculation = xlCalculationAutomatic
+Application.ScreenUpdating = True
+Application.DisplayStatusBar = True
+Application.EnableEvents = True
+ActiveSheet.DisplayPageBreaks = True
+End Sub
+Sub GL_483180_USD()
+Dim iLastrow As Long
+
+Application.Calculation = xlCalculationManual
+Application.ScreenUpdating = False
+Application.DisplayStatusBar = False
+Application.EnableEvents = False
+ActiveSheet.DisplayPageBreaks = False
+
+iLastrow = USD483.Cells(USD483.Cells.Rows.Count, 1).End(xlUp).Row
+iLastrow1 = Sheet3.Cells(Sheet3.Cells.Rows.Count, 1).End(xlUp).Row
+
+For i = 1 To iLastrow
+    If USD483.Cells(i, 7) <> "" Then
+    USD483.Cells(i, 8) = USD483.Cells(i + 1, 1)
+    iLastrow1 = Sheet3.Cells(Sheet3.Cells.Rows.Count, 1).End(xlUp).Row
+    USD483.Rows(i).Copy
+    Sheet3.Rows(iLastrow1 + 1).PasteSpecial
+    Sheet3.Cells(iLastrow1 + 1, 9) = "483-180 USD"
+    End If
+Next
+
+Application.Calculation = xlCalculationAutomatic
+Application.ScreenUpdating = True
+Application.DisplayStatusBar = True
+Application.EnableEvents = True
+ActiveSheet.DisplayPageBreaks = True
+
+End Sub
